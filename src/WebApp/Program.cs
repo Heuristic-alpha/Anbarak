@@ -27,6 +27,8 @@ var app = builder.Build();
 
 #region AppConfig
 
+await IdentityDataSeeder.SeedAsync(app.Services, app.Configuration, app.Environment.IsDevelopment());
+
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
