@@ -9,7 +9,7 @@ public enum UnitOfMeasure
     Milliliter = 5,
     Meter = 6,
     Centimeter = 7,
-    KiloMeter = 8,
+    Kilometer = 8,
     Box = 9,
     Pallet = 10
 }
