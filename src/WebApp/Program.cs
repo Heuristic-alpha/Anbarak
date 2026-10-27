@@ -18,7 +18,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequiredLength = 6;
 
-    options.User.RequireUniqueEmail = true;
+    options.User.RequireUniqueEmail = false;
 }).AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 #endregion

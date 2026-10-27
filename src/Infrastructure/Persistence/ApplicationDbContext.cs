@@ -1,4 +1,5 @@
-﻿using Anbarak.Infrastructure.Identity;
+﻿using Anbarak.Domain.Entities;
+using Anbarak.Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Net.NetworkInformation;
@@ -12,9 +13,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     }
 
+    public DbSet<Product> Products => Set<Product>();
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.HasDefaultSchema("identity");
+        builder.HasDefaultSchema(Constance.Schemas.IDENTITY);
+
+        builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
 }
