@@ -19,7 +19,7 @@ public class IdentityDataSeeder
         {
             IdentityRoles.Administrator,
             IdentityRoles.WarehouseManager,
-            IdentityRoles.WarehouseOprator,
+            IdentityRoles.WarehouseOperator,
             IdentityRoles.WarehouseVisitor,
         };
 
@@ -39,13 +39,13 @@ public class IdentityDataSeeder
         string? email = configuration.GetValue<string>("BootstrapAdmin:Email");
         string? password = configuration.GetValue<string>("BootstrapAdmin:Password");
 
+        // Bootstrap account creation is optional.
+        if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(password)) return;
+
         if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(password))
         {
             throw new InvalidOperationException("Both BootstrapAdmin:Email and BootstrapAdmin:Password must be configured together.");
         }
-
-        // Bootstrap account creation is optional.
-        if (string.IsNullOrWhiteSpace(email) && string.IsNullOrWhiteSpace(password)) return;
 
         var adminUser = await userManager.FindByEmailAsync(email);
         if (adminUser == null)
