@@ -1,11 +1,16 @@
+using Anbarak.Application.Abstractions.Identity;
 using Anbarak.Infrastructure;
 using Anbarak.Infrastructure.Identity;
 using Anbarak.Infrastructure.Persistence;
+using Anbarak.WebApp.Services;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region BuilderConfig
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();

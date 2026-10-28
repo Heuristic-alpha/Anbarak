@@ -1,4 +1,5 @@
-﻿using Anbarak.Infrastructure.Persistence;
+﻿using Anbarak.Application.Abstractions.Persistence;
+using Anbarak.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,8 +16,8 @@ public static class DependencyInjection
             throw new InvalidOperationException("Connection string \'Anbarak\' was not configured.");
         }
 
-        services.AddDbContext<ApplicationDbContext>(options => 
-        { 
+        services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
+        {
             options.UseNpgsql(connectionString);
         });
 

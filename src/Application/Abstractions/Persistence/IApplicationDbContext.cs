@@ -1,7 +1,7 @@
 ﻿using Anbarak.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CleanTest.Application.Common.Interfaces;
+namespace Anbarak.Application.Abstractions.Persistence;
 
 public interface IApplicationDbContext
 {

@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Abstractions\Identity\" />
     <Folder Include="Abstractions\Messaging\" />
-    <Folder Include="Abstractions\Persistence\" />
+	<Folder Include="Abstractions\Persistence\" />
+    <Folder Include="Common\" />
     <Folder Include="Features\Commands\" />
     <Folder Include="Features\Queries\" />
   </ItemGroup>
