@@ -7,8 +7,4 @@
 	<RootNamespace>Anbarak.Contracts</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-
 </Project>

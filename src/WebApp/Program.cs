@@ -1,3 +1,4 @@
+using Anbarak.Application;
 using Anbarak.Application.Abstractions.Identity;
 using Anbarak.Infrastructure;
 using Anbarak.Infrastructure.Identity;
@@ -14,7 +15,10 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
     options.Password.RequireDigit = false;
