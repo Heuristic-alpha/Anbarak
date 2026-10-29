@@ -15,8 +15,7 @@
             </p>
         </div>
 
-        <a asp-action="Index"
-           class="btn btn-outline-secondary">
+        <a asp-action="Index" class="btn btn-outline-secondary">
             Back to catalog
         </a>
     </div>
@@ -34,8 +33,7 @@
 
         <div class="content-card-body">
             <form asp-action="Create" method="post">
-                <div asp-validation-summary="ModelOnly"
-                     class="alert alert-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                 <div class="mb-4">
                     <label asp-for="Sku" class="form-label"></label>
@@ -43,8 +41,7 @@
                            class="form-control"
                            placeholder="e.g. CAB-001"
                            autocomplete="off" />
-                    <span asp-validation-for="Sku"
-                          class="field-validation-error"></span>
+                    <span asp-validation-for="Sku" class="field-validation-error"></span>
                     <div class="form-text">
                         The SKU uniquely identifies the product.
                         Whitespace is not allowed.
@@ -56,30 +53,24 @@
                     <input asp-for="Name"
                            class="form-control"
                            placeholder="Enter product name" />
-                    <span asp-validation-for="Name"
-                          class="field-validation-error"></span>
+                    <span asp-validation-for="Name" class="field-validation-error"></span>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="UnitOfMeasure"
-                           class="form-label"></label>
+                    <label asp-for="UnitOfMeasure" class="form-label"></label>
 
-                    <select asp-for="UnitOfMeasure"
-                            asp-items="ViewBag.UnitOfMeasures"
-                            class="form-select">
+                    <select asp-for="UnitOfMeasure" asp-items="ViewBag.UnitOfMeasures" class="form-select">
                         <option value="">Select a unit of measure</option>
                     </select>
 
-                    <span asp-validation-for="UnitOfMeasure"
-                          class="field-validation-error"></span>
+                    <span asp-validation-for="UnitOfMeasure" class="field-validation-error"></span>
                     <div class="form-text">
                         This is the base unit used to measure this product.
                     </div>
                 </div>
 
                 <div class="mb-4">
-                    <label asp-for="Description"
-                           class="form-label"></label>
+                    <label asp-for="Description" class="form-label"></label>
                     <textarea asp-for="Description"
                               class="form-control"
                               rows="4"
@@ -96,8 +87,7 @@
                         Cancel
                     </a>
 
-                    <button type="submit"
-                            class="btn btn-primary px-4">
+                    <button type="submit" class="btn btn-primary px-4">
                         Save product
                     </button>
                 </div>

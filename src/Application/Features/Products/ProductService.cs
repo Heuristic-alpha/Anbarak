@@ -79,7 +79,7 @@ public sealed class ProductService(IApplicationDbContext dbContext)
 
     public async Task<ProductDto?> UpdateAsync(long id, UpdateProductInput input, CancellationToken cancellationToken = default)
     {
-        var product = await dbContext.Products.SingleOrDefaultAsync(product => product.Id == id, cancellationToken);
+        var product = await dbContext.Products.FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
 
         if (product is null)
         {
@@ -96,7 +96,7 @@ public sealed class ProductService(IApplicationDbContext dbContext)
 
     public async Task<bool> DeactivateAsync(long id, CancellationToken cancellationToken = default)
     {
-        var product = await dbContext.Products.SingleOrDefaultAsync(product => product.Id == id, cancellationToken);
+        var product = await dbContext.Products.FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
 
         if (product is null)
         {
@@ -112,7 +112,7 @@ public sealed class ProductService(IApplicationDbContext dbContext)
 
     public async Task<bool> ActivateAsync(long id, CancellationToken cancellationToken = default)
     {
-        var product = await dbContext.Products.SingleOrDefaultAsync(product => product.Id == id, cancellationToken);
+        var product = await dbContext.Products.FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
 
         if (product is null)
         {

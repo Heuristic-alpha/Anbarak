@@ -66,9 +66,9 @@ public sealed class ProductsController(ProductService productService) : Controll
                 model.UnitOfMeasure,
                 model.Description);
 
-            await productService.CreateAsync(input, cancellationToken);
+            var created = await productService.CreateAsync(input, cancellationToken);
 
-            TempData["SuccessMessage"] = "Product created successfully.";
+            TempData["SuccessMessage"] = $"Product \'{created.Name}\' created successfully.";
 
             return RedirectToAction(nameof(Index));
         }
@@ -136,15 +136,14 @@ public sealed class ProductsController(ProductService productService) : Controll
                 model.Name,
                 model.Description);
 
-            var updated = await productService.UpdateAsync(
-                id, input, cancellationToken);
+            var updated = await productService.UpdateAsync( id, input, cancellationToken);
 
             if (updated is null)
             {
                 return NotFound();
             }
 
-            TempData["SuccessMessage"] = "Product updated successfully.";
+            TempData["SuccessMessage"] = $"Product \'{updated.Name}\' updated successfully.";
 
             return RedirectToAction(nameof(Index));
         }
@@ -158,12 +157,9 @@ public sealed class ProductsController(ProductService productService) : Controll
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Deactivate(
-        long id,
-        CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Deactivate(long id, CancellationToken cancellationToken = default)
     {
-        var succeeded = await productService.DeactivateAsync(
-            id, cancellationToken);
+        var succeeded = await productService.DeactivateAsync(id, cancellationToken);
 
         if (!succeeded)
         {
@@ -172,17 +168,14 @@ public sealed class ProductsController(ProductService productService) : Controll
 
         TempData["SuccessMessage"] = "Product deactivated successfully.";
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Index), new { includeInactive = true });
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Activate(
-        long id,
-        CancellationToken cancellationToken = default)
+    public async Task<IActionResult> Activate(long id, CancellationToken cancellationToken = default)
     {
-        var succeeded = await productService.ActivateAsync(
-            id, cancellationToken);
+        var succeeded = await productService.ActivateAsync(id, cancellationToken);
 
         if (!succeeded)
         {
@@ -191,9 +184,7 @@ public sealed class ProductsController(ProductService productService) : Controll
 
         TempData["SuccessMessage"] = "Product activated successfully.";
 
-        return RedirectToAction(
-            nameof(Index),
-            new { includeInactive = true });
+        return RedirectToAction(nameof(Index), new { includeInactive = true });
     }
 
     private void PopulateUnitOfMeasures(string? selected = null)
