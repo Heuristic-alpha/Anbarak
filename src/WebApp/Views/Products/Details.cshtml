@@ -1,0 +1,68 @@
+﻿@using Anbarak.Contracts.DTOs.Products
+@model ProductDto
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+
+<div class="content-card">
+    <div class="content-card-header">
+        <div>
+            <h2 class="section-title">@Model.Name</h2>
+            <p class="section-description">
+                Product details and audit information
+            </p>
+        </div>
+
+        <span class="status-badge @(Model.IsActive ? "status-active" : "status-inactive")">
+            @(Model.IsActive ? "Active" : "Inactive")
+        </span>
+    </div>
+
+    <div class="content-card-body">
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <div class="detail-label">SKU</div>
+                <p class="detail-value product-sku">@Model.Sku</p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="detail-label">Unit of measure</div>
+                <p class="detail-value">@Model.UnitOfMeasure</p>
+            </div>
+
+            <div class="col-12">
+                <div class="detail-label">Description</div>
+                <p class="detail-value fw-normal">
+                    @(string.IsNullOrWhiteSpace(Model.Description)
+                        ? "No description provided."
+                        : Model.Description)
+                </p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="detail-label">Created</div>
+                <p class="detail-value">@Model.Created.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</p>
+            </div>
+
+            <div class="col-12 col-md-6">
+                <div class="detail-label">Last modified</div>
+                <p class="detail-value">@Model.LastModified.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</p>
+            </div>
+        </div>
+
+        <hr class="my-4" />
+
+        <div class="d-flex justify-content-end gap-2">
+            <a asp-action="Index"
+               class="btn btn-outline-secondary">
+                Back to catalog
+            </a>
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-primary">
+                Edit product
+            </a>
+        </div>
+    </div>
+</div>

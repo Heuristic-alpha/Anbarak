@@ -1,37 +1,42 @@
-﻿@using Anbarak.Infrastructure.Identity
+﻿
+@using Anbarak.Infrastructure.Identity
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManager
 
-<ul>
+<div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
     @if (SignInManager.IsSignedIn(User))
     {
-        <li>
-            Hello, @UserManager.GetUserName(User)!
-        </li>
-        <li>
-            <form asp-area="Identity"
-                  asp-page="/Account/Logout"
-                  asp-route-returnUrl="/"
-                  method="post">
-                <button type="submit">Log out</button>
-            </form>
-        </li>
+        <span class="navbar-text text-white-50 small me-2">
+            Signed in as
+            <strong class="text-white">
+                @User.Identity?.Name
+            </strong>
+        </span>
+
+        <form asp-area="Identity"
+              asp-page="/Account/Logout"
+              asp-route-returnUrl="/"
+              method="post"
+              class="d-inline">
+            <button type="submit"
+                    class="btn btn-sm btn-outline-light">
+                Sign out
+            </button>
+        </form>
     }
     else
     {
-        <li>
-            <a asp-area="Identity"
-               asp-page="/Account/Register">
-                Register
-            </a>
-        </li>
-        <li>
-            <a asp-area="Identity"
-               asp-page="/Account/Login">
-                Log in
-            </a>
-        </li>
+        <a class="btn btn-sm btn-outline-light"
+           asp-area="Identity"
+           asp-page="/Account/Login">
+            Sign in
+        </a>
+
+        <a class="btn btn-sm btn-light"
+           asp-area="Identity"
+           asp-page="/Account/Register">
+            Create account
+        </a>
     }
-</ul>
+</div>

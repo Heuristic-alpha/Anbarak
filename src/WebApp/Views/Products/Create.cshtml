@@ -1,0 +1,107 @@
+﻿
+@model Anbarak.WebApp.ViewModels.Products.ProductCreateViewModel
+
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<div class="form-shell">
+    <div class="page-header">
+        <div>
+            <div class="page-eyebrow">Inventory / Catalog</div>
+            <h1 class="page-title">Create product</h1>
+            <p class="page-subtitle">
+                Add a new item to the warehouse product catalog.
+            </p>
+        </div>
+
+        <a asp-action="Index"
+           class="btn btn-outline-secondary">
+            Back to catalog
+        </a>
+    </div>
+
+    <div class="content-card">
+        <div class="content-card-header">
+            <div>
+                <h2 class="section-title">Product information</h2>
+                <p class="section-description">
+                    Enter the identifying details for this product.
+                </p>
+            </div>
+            <span class="badge text-bg-light border">New product</span>
+        </div>
+
+        <div class="content-card-body">
+            <form asp-action="Create" method="post">
+                <div asp-validation-summary="ModelOnly"
+                     class="alert alert-danger"></div>
+
+                <div class="mb-4">
+                    <label asp-for="Sku" class="form-label"></label>
+                    <input asp-for="Sku"
+                           class="form-control"
+                           placeholder="e.g. CAB-001"
+                           autocomplete="off" />
+                    <span asp-validation-for="Sku"
+                          class="field-validation-error"></span>
+                    <div class="form-text">
+                        The SKU uniquely identifies the product.
+                        Whitespace is not allowed.
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name"
+                           class="form-control"
+                           placeholder="Enter product name" />
+                    <span asp-validation-for="Name"
+                          class="field-validation-error"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="UnitOfMeasure"
+                           class="form-label"></label>
+
+                    <select asp-for="UnitOfMeasure"
+                            asp-items="ViewBag.UnitOfMeasures"
+                            class="form-select">
+                        <option value="">Select a unit of measure</option>
+                    </select>
+
+                    <span asp-validation-for="UnitOfMeasure"
+                          class="field-validation-error"></span>
+                    <div class="form-text">
+                        This is the base unit used to measure this product.
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="Description"
+                           class="form-label"></label>
+                    <textarea asp-for="Description"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Optional product description"></textarea>
+                    <span asp-validation-for="Description"
+                          class="field-validation-error"></span>
+                </div>
+
+                <hr class="my-4" />
+
+                <div class="d-flex flex-wrap justify-content-end gap-2">
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary px-4">
+                        Cancel
+                    </a>
+
+                    <button type="submit"
+                            class="btn btn-primary px-4">
+                        Save product
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

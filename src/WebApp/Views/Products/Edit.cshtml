@@ -1,0 +1,52 @@
+﻿@model Anbarak.WebApp.ViewModels.Products.ProductEditViewModel
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h1>Edit Product</h1>
+
+<p>SKU: @ViewBag.ProductSku</p>
+<p>Unit of measure: @ViewBag.UnitOfMeasure</p>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly"
+         class="alert alert-danger"></div>
+
+    <div class="mb-4">
+        <label asp-for="Name" class="form-label"></label>
+        <input asp-for="Name"
+               class="form-control"
+               placeholder="Enter product name" />
+        <span asp-validation-for="Name"
+              class="field-validation-error"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description"
+                  class="form-control"
+                  rows="4"></textarea>
+        <span asp-validation-for="Description"
+              class="field-validation-error"></span>
+    </div>
+
+    <div class="alert alert-light border small">
+        <strong>SKU:</strong> @ViewBag.ProductSku
+        <span class="mx-2">|</span>
+        <strong>Unit:</strong> @ViewBag.UnitOfMeasure
+        <div class="text-secondary mt-1">
+            SKU and unit of measure are not editable here.
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2">
+        <a asp-action="Index"
+           class="btn btn-outline-secondary">
+            Cancel
+        </a>
+        <button type="submit" class="btn btn-primary">
+            Save changes
+        </button>
+    </div>
+</form>

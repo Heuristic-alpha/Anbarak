@@ -60,17 +60,17 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     private void ApplyAuditInformation()
     {
-        var utcNow = DateTime.UtcNow;
+        var UtcNow = DateTime.UtcNow;
         var userId = _currentUserService.UserId;
 
         foreach (var entry in ChangeTracker.Entries<BaseAuditableEntity>())
         {
             if (entry.State == EntityState.Added)
             {
-                entry.Entity.Created = utcNow;
+                entry.Entity.Created = UtcNow;
                 entry.Entity.CreatedBy = userId;
 
-                entry.Entity.LastModified = utcNow;
+                entry.Entity.LastModified = UtcNow;
                 entry.Entity.LastModifiedBy = userId;
             }
             else if (entry.State == EntityState.Modified)
@@ -79,7 +79,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 entry.Property(entity => entity.Created).IsModified = false;
                 entry.Property(entity => entity.CreatedBy).IsModified = false;
 
-                entry.Entity.LastModified = utcNow;
+                entry.Entity.LastModified = UtcNow;
                 entry.Entity.LastModifiedBy = userId;
             }
         }

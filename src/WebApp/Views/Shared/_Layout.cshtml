@@ -1,29 +1,97 @@
-﻿<!DOCTYPE html>
+﻿
+@using Anbarak.Application.Security
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0" />
-    <title>Anbarak - @ViewData["Title"]</title>
-</head>
-<body>
-    <header>
-        <nav>
-            <a asp-controller="Home" asp-action="Index">
-                Anbarak
-            </a>
-            <partial name="_LoginPartial" />
-        </nav>
-    </header>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <main>
+    <title>@ViewData["Title"] | Anbarak</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+          crossorigin="anonymous" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body class="app-body">
+    <nav class="navbar navbar-expand-lg navbar-dark app-navbar sticky-top">
+        <div class="container-fluid app-container">
+
+            <a class="navbar-brand d-flex align-items-center gap-2"
+               asp-controller="Home"
+               asp-action="Index">
+
+                <span class="brand-mark">A</span>
+
+                <span>
+                    <span class="brand-name">Anbarak</span>
+                    <span class="brand-caption">WAREHOUSE MANAGEMENT</span>
+                </span>
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNavigation"
+                    aria-controls="mainNavigation"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavigation">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           asp-controller="Home"
+                           asp-action="Index">
+                            Home
+                        </a>
+                    </li>
+
+                    @if (User.IsInRole(IdentityRoles.Administrator) ||
+                         User.IsInRole(IdentityRoles.WarehouseManager))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link"
+                               asp-controller="Products"
+                               asp-action="Index">
+                                Products
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+
+    <main class="app-main container-fluid app-container py-4 py-lg-5">
         @RenderBody()
     </main>
 
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Anbarak</p>
+    <footer class="app-footer">
+        <div class="container-fluid app-container d-flex flex-column flex-sm-row
+                    justify-content-between align-items-sm-center gap-2">
+            <span>
+                &copy; @DateTime.Now.Year <strong>Anbarak</strong>
+            </span>
+            <span class="footer-caption">Warehouse Management System</span>
+        </div>
     </footer>
 
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+            crossorigin="anonymous"></script>
 </body>
 </html>
