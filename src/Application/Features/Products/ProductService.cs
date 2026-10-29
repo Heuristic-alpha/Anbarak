@@ -49,18 +49,20 @@ public sealed class ProductService(IApplicationDbContext dbContext)
 
     public async Task<ProductDto> CreateAsync(CreateProductInput input, CancellationToken cancellationToken = default)
     {
+        if (!Enum.TryParse<UnitOfMeasure>(input.UnitOfMeasure, ignoreCase: true, out var unitOfMeasure) || !Enum.IsDefined(unitOfMeasure))
+        {
+            throw new ArgumentException("The specified unit of measure is invalid.", nameof(input.UnitOfMeasure));
+        }
+
         // The Domain entity validates the input and normalizes the SKU.
         var product = new Product(
             input.Sku,
             input.Name,
-            Enum.Parse<UnitOfMeasure>(input.UnitOfMeasure),
+            unitOfMeasure,
             input.Description);
 
         // Check the normalized SKU before inserting.
-        var skuExists = await dbContext.Products
-            .AnyAsync(
-                existing => existing.Sku == product.Sku,
-                cancellationToken);
+        var skuExists = await dbContext.Products.AnyAsync(existing => existing.Sku == product.Sku, cancellationToken);
 
         if (skuExists)
         {
@@ -108,7 +110,7 @@ public sealed class ProductService(IApplicationDbContext dbContext)
         return true;
     }
 
-    public async Task<bool> ActivateAsync(long id,CancellationToken cancellationToken = default)
+    public async Task<bool> ActivateAsync(long id, CancellationToken cancellationToken = default)
     {
         var product = await dbContext.Products.SingleOrDefaultAsync(product => product.Id == id, cancellationToken);
 
