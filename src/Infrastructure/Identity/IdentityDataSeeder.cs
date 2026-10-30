@@ -1,4 +1,6 @@
-﻿using Anbarak.Application.Security;
+﻿using Anbarak.Application.Abstractions.Persistence;
+using Anbarak.Application.Security;
+using Anbarak.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,9 @@ public class IdentityDataSeeder
 
         var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+
+        dbContext.Database.EnsureCreated();
 
         string[] roleNames = new string[]
         {
