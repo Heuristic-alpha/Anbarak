@@ -39,23 +39,16 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
 
-    public override Task<int> SaveChangesAsync(
-        CancellationToken cancellationToken = default)
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return SaveChangesAsync(
-            acceptAllChangesOnSuccess: true,
-            cancellationToken);
+        return SaveChangesAsync(acceptAllChangesOnSuccess: true,cancellationToken);
     }
 
-    public override Task<int> SaveChangesAsync(
-        bool acceptAllChangesOnSuccess,
-        CancellationToken cancellationToken = default)
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess,CancellationToken cancellationToken = default)
     {
         ApplyAuditInformation();
 
-        return base.SaveChangesAsync(
-            acceptAllChangesOnSuccess,
-            cancellationToken);
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess,cancellationToken);
     }
 
     private void ApplyAuditInformation()
