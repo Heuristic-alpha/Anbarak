@@ -18,8 +18,8 @@ public class IdentityDataSeeder
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-        await dbContext.Database.EnsureCreatedAsync();
-        await dbContext.Database.MigrateAsync();
+        dbContext.Database.EnsureDeleted();
+        dbContext.Database.EnsureCreated();
 
         string[] roleNames = new string[]
         {

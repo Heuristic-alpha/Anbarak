@@ -1,6 +1,6 @@
 ﻿namespace Anbarak.Infrastructure.Persistence;
 
-public static class Constance
+public static class Constants
 {
     public static class Schemas
     {

@@ -22,7 +22,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.HasDefaultSchema(Constance.Schemas.IDENTITY);
+        builder.HasDefaultSchema(Constants.Schemas.IDENTITY);
 
         builder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
     }
@@ -60,18 +60,20 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     private void ApplyAuditInformation()
     {
-        var UtcNow = DateTime.UtcNow;
-        var userId = _currentUserService.UserId;
+        DateTime UtcNow = DateTime.UtcNow;
+       // string? userId = _currentUserService.UserId;
+        string? username = _currentUserService.UserName;
+       // string? email = _currentUserService.UserEmail;
 
         foreach (var entry in ChangeTracker.Entries<BaseAuditableEntity>())
         {
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.Created = UtcNow;
-                entry.Entity.CreatedBy = userId;
+                entry.Entity.CreatedBy = username;
 
                 entry.Entity.LastModified = UtcNow;
-                entry.Entity.LastModifiedBy = userId;
+                entry.Entity.LastModifiedBy = username;
             }
             else if (entry.State == EntityState.Modified)
             {
@@ -80,7 +82,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
                 entry.Property(entity => entity.CreatedBy).IsModified = false;
 
                 entry.Entity.LastModified = UtcNow;
-                entry.Entity.LastModifiedBy = userId;
+                entry.Entity.LastModifiedBy = username;
             }
         }
     }
