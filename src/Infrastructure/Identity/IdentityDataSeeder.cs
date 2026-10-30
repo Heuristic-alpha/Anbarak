@@ -1,7 +1,7 @@
-﻿using Anbarak.Application.Abstractions.Persistence;
-using Anbarak.Application.Security;
+﻿using Anbarak.Application.Security;
 using Anbarak.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,7 +18,8 @@ public class IdentityDataSeeder
         var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
         var dbContext = services.GetRequiredService<ApplicationDbContext>();
 
-        dbContext.Database.EnsureCreated();
+        await dbContext.Database.EnsureCreatedAsync();
+        await dbContext.Database.MigrateAsync();
 
         string[] roleNames = new string[]
         {
@@ -28,9 +29,9 @@ public class IdentityDataSeeder
             IdentityRoles.WarehouseVisitor,
         };
 
-        foreach ( var roleName in roleNames)
+        foreach (var roleName in roleNames)
         {
-            if(! await roleManager.RoleExistsAsync(roleName))
+            if (!await roleManager.RoleExistsAsync(roleName))
             {
                 IdentityRole role = new IdentityRole(roleName);
                 var result = await roleManager.CreateAsync(role);
