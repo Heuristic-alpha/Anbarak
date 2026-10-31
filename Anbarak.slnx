@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/Anbarak.Domain.Tests/Anbarak.Domain.Tests.csproj" />
+  </Folder>
   <Project Path="src/Application/Application.csproj" />
   <Project Path="src/Contracts/Contracts.csproj" />
   <Project Path="src/Domain/Domain.csproj" />
