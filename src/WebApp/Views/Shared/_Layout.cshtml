@@ -1,5 +1,4 @@
-﻿
-@using Anbarak.Application.Security
+﻿@using Anbarak.Application.Security
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +27,7 @@
             <a class="navbar-brand d-flex align-items-center gap-2" asp-controller="Home" asp-action="Index">
                 <span class="brand-mark">A</span>
                 <span>
-                    <span class="brand-name">Anbarak</span>
+                    <span class="brand-name text-info">Anbarak</span>
                     <span class="brand-caption">WAREHOUSE MANAGEMENT</span>
                 </span>
             </a>
@@ -50,18 +49,24 @@
                         <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
 
-                    @if (User.IsInRole(IdentityRoles.Administrator) ||
-                         User.IsInRole(IdentityRoles.WarehouseManager))
+                    @if (User.IsInRole(IdentityRoles.Administrator))
                     {
                         <li class="nav-item">
-                            <a class="nav-link"
-                               asp-controller="Products"
-                               asp-action="Index">
-                                Products
+                            <a class="nav-link text-danger" asp-controller="Admin" asp-action="Index">
+                                Administration
                             </a>
                         </li>
                     }
-                </ul>
+
+                    @if (User.IsInRole(IdentityRoles.Administrator) || User.IsInRole(IdentityRoles.WarehouseManager))
+                    {                           
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Products" asp-action="Index">
+                                Products
+                            </a>
+                        </li>
+                    }              
+                    </ul>
 
                 <partial name="_LoginPartial" />
             </div>
@@ -73,10 +78,9 @@
     </main>
 
     <footer class="app-footer">
-        <div class="container-fluid app-container d-flex flex-column flex-sm-row
-                    justify-content-between align-items-sm-center gap-2">
+        <div class="container-fluid app-container d-flex flex-column flex-sm-row justify-content-between align-items-sm-center gap-2">
             <span>
-                &copy; @DateTime.Now.Year <strong>Anbarak</strong>
+                &copy; @DateTime.Now.Year <strong>Anbarak</strong> by Hossein Sarlak
             </span>
             <span class="footer-caption">Warehouse Management System</span>
         </div>

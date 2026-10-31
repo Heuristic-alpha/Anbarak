@@ -74,7 +74,7 @@ public sealed class ProductsController(ProductService productService) : Controll
         }
         catch (ProductSkuAlreadyExistsException)
         {
-            ModelState.AddModelError(nameof(model.Sku), "A product with this SKU already exists.");
+            ModelState.AddModelError(nameof(model.Sku), $"A product with this SKU \'{model.Sku}\' already exists.");
         }
         catch (ArgumentException exception)
         {
@@ -114,8 +114,7 @@ public sealed class ProductsController(ProductService productService) : Controll
         CancellationToken cancellationToken = default)
     {
         // Fetch persisted display details, not client-supplied values.
-        var existing = await productService.GetByIdAsync(
-            id, cancellationToken);
+        var existing = await productService.GetByIdAsync(id, cancellationToken);
 
         if (existing is null)
         {
@@ -132,11 +131,9 @@ public sealed class ProductsController(ProductService productService) : Controll
 
         try
         {
-            var input = new UpdateProductInput(
-                model.Name,
-                model.Description);
+            var input = new UpdateProductInput(model.Name, model.Description);
 
-            var updated = await productService.UpdateAsync( id, input, cancellationToken);
+            var updated = await productService.UpdateAsync(id, input, cancellationToken);
 
             if (updated is null)
             {

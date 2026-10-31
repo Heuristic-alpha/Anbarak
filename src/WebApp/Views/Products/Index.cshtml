@@ -1,4 +1,6 @@
-﻿@model IReadOnlyList<Anbarak.Contracts.DTOs.Products.ProductDto>
+﻿@using Anbarak.Contracts.DTOs.Products
+
+@model IReadOnlyList<ProductDto>
 
 @{
     ViewData["Title"] = "Products";
@@ -21,8 +23,7 @@
 
 @if (TempData["SuccessMessage"] is string successMessage)
 {
-    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm"
-         role="status">
+    <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="status">
         @successMessage
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

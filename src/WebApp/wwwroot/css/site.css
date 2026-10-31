@@ -391,13 +391,13 @@ textarea.form-control {
     margin-top: 2rem;
     padding: 1.25rem 0;
     border-top: 1px solid var(--anbarak-border);
-    color: #68758a;
-    background: #fff;
+    color: #142238;
+    background: #cfd8e4;
     font-size: .85rem;
 }
 
 .footer-caption {
-    color: #98a2b3;
+    color: #142238;
 }
 
 /* Responsive adjustments */
