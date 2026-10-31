@@ -1,8 +1,6 @@
 using Anbarak.Application;
 using Anbarak.Application.Abstractions.Identity;
 using Anbarak.Infrastructure;
-using Anbarak.Infrastructure.Identity;
-using Anbarak.Infrastructure.Persistence;
 using Anbarak.WebApp.Services;
 using Microsoft.AspNetCore.Identity;
 
